@@ -1,45 +1,40 @@
 #ifndef MALLOC_H
 #define MALLOC_H
 
-#include <string.h>
+#include <unistd.h>
+#include <sys/mman.h>
 
-//define
-
+//size
 #define TINY_HEAP (4 * getpagesize())
 #define SMALL_HEAP (16 * getpagesize())
 #define TINY_BLOCK (TINY_HEAP / 128)
 #define SMALL_BLOCK (SMALL_HEAP / 128)
 
-//type
-
-typedef enum e_bool {
-    FALSE,
-    TRUE
-}   t_bool;
+//heap flags
+#define TINY
+#define SMALL
+#define LARGE
 
 //struct
-
-typedef struct  s_heap {
+typedef struct s_heap
+{
+    char            flags;
     struct s_heap*  prev;
     struct s_heap*  next;
-    size_t          size;
-    size_t          free_size;
-    size_t          block;
 }   t_heap;
 
-typedef struct  s_block {
+typedef struct  s_block
+{
+    size_t          size;
+    char            flags;
     struct s_block* prev;
     struct s_block* next;
-    size_t          size;
-    t_bool          free;
 }   t_block;
 
 //global
-
-extern t_heap*  heap;
+extern t_heap*  g_heap;
 
 //lib
-
 void*   ft_malloc(size_t size);
 
 #endif

@@ -1,3 +1,3 @@
 #include "malloc.h"
 
-t_heap  *heap = NULL;
+t_heap  *g_heap = NULL;
