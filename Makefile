@@ -6,15 +6,17 @@ NAME = libft_malloc_$(HOSTTYPE).so
 
 INC= inc
 
-CC= gcc
+CC= clang
 # CFLAGS= -Wall -Wextra -Werror
-CFLAGS=
+CFLAGS= -fsanitize=address
 
 AR= ar
 ARFLAGS= rcs
 
 SRC=	src/lib/malloc.c \
 		src/utils/global.c \
+		src/utils/create_heap.c \
+		src/utils/search_heap.c \
 
 OBJ= $(SRC:.c=.o)
 
