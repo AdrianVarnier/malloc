@@ -5,48 +5,35 @@
 #include <sys/mman.h>
 
 // size
-#define TINY_HEAP (4 * getpagesize())
-#define SMALL_HEAP (16 * getpagesize())
+#define HEADER sizeof(t_header)
+#define TINY_HEAP (4 * getpagesize() - HEADER)
+#define SMALL_HEAP (16 * getpagesize() - HEADER)
+#define TINY_BLOCK (TINY_HEAP / 112 - HEADER)
+#define SMALL_BLOCK (SMALL_HEAP / 112 - HEADER)
 
-#define TINY_BLOCK (TINY_HEAP / 128)
-#define SMALL_BLOCK (SMALL_HEAP / 128)
-
-#define HEAP_SIZE sizeof(t_heap)
-#define BLOCK_SIZE sizeof(t_block)
-
-// heap flags
+// flags
 #define TINY (1 << 0)
 #define SMALL (1 << 1)
 #define LARGE (1 << 2)
 
-// block flags
-#define FREE (1 << 0)
+#define FREE (1 << 4)
 
 // struct
-typedef struct s_heap
+typedef struct  s_header
 {
-    size_t          size;
-    char            flags;
-    struct s_heap*  prev;
-    struct s_heap*  next;
-}   t_heap;
-
-typedef struct  s_block
-{
-    size_t          size;
-    char            flags;
-    struct s_block* prev;
-    struct s_block* next;
-}   t_block;
+    size_t              size;
+    size_t              flags;
+    struct s_header*    prev;
+    struct s_header*    next;
+}   t_header;
 
 // global
-extern t_heap*  g_heap;
+extern t_header*  g_heap;
 
 // lib
 void*   ft_malloc(size_t size);
 
 // utils
-t_heap* create_heap(size_t size);
-void*   search_heap(size_t size);
+t_header*   alloc_heap(size_t size);
 
 #endif

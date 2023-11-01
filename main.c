@@ -3,28 +3,29 @@
 
 int main()
 {
-    t_heap* h = NULL;
-    t_block* b = NULL;
+    t_header*   h = NULL;
 
-    h = create_heap(TINY_HEAP);
-    b = search_heap(TINY_BLOCK);
-    printf("%lu\n", 2 * (BLOCK_SIZE + TINY_BLOCK) + HEAP_SIZE);
-    if (b != NULL)
-        printf("%ld, %d, %p, %p, %ld\n", b->size, b->flags, b->prev, b->next, h->size);
-    else
-        printf("null\n");
+    alloc_heap(TINY_HEAP); 
+    alloc_heap(TINY_HEAP); 
+    alloc_heap(SMALL_HEAP); 
+    alloc_heap(TINY_HEAP);
+    alloc_heap(SMALL_HEAP); 
+    alloc_heap(SMALL_HEAP + 1);
+    alloc_heap(SMALL_HEAP); 
+    alloc_heap(SMALL_HEAP + 1);
+    alloc_heap(SMALL_HEAP + 1);
 
-    b = search_heap(SMALL_BLOCK);
-    if (b != NULL)
-        printf("%ld, %d, %p, %p, %ld\n", b->size, b->flags, b->prev, b->next, h->size);
-    else
-        printf("null\n");
-    
-    b = search_heap(TINY_BLOCK);
-    if (b != NULL)
-        printf("%ld, %d, %p, %p, %ld\n", b->size, b->flags, b->prev, b->next, h->size);
-    else
-        printf("null\n");
-    
+    h = g_heap;
+    for (t_header *h = g_heap; h != NULL; h = h->next)
+    {
+        if (h->flags & TINY)
+            printf("TINY:  ");
+        else if (h->flags & SMALL)
+            printf("SMALL: ");
+        else
+            printf("LARGE: ");
+        printf("%ld, %p, %p\n", h->size, h->prev, h->next);
+    }
+
     return (0);
 }
