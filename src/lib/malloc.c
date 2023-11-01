@@ -4,5 +4,6 @@
 
 void*   ft_malloc(size_t size)
 {
-    return (NULL); 
+    
+    return (NULL);
 }

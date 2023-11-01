@@ -5,27 +5,26 @@ int main()
 {
     t_header*   h = NULL;
 
-    alloc_heap(TINY_HEAP); 
-    alloc_heap(TINY_HEAP); 
-    alloc_heap(SMALL_HEAP); 
-    alloc_heap(TINY_HEAP);
-    alloc_heap(SMALL_HEAP); 
-    alloc_heap(SMALL_HEAP + 1);
-    alloc_heap(SMALL_HEAP); 
-    alloc_heap(SMALL_HEAP + 1);
-    alloc_heap(SMALL_HEAP + 1);
-
-    h = g_heap;
-    for (t_header *h = g_heap; h != NULL; h = h->next)
+    h = alloc_heap(TINY_HEAP);
+    t_header* b = h + HEADER;
+    alloc_block(b, 11);
+    b = b->next;
+    alloc_block(b, 22);
+    b = b->next;
+    alloc_block(b, 33);
+    b = b->next;
+    alloc_block(b, 44);
+    b = b->next;
+    alloc_block(b, 55);
+    for (t_header* i = h + HEADER; i != NULL; i = i->next)
     {
-        if (h->flags & TINY)
-            printf("TINY:  ");
-        else if (h->flags & SMALL)
-            printf("SMALL: ");
+        if (i->flags & FREE)
+            printf("USED: ");
         else
-            printf("LARGE: ");
-        printf("%ld, %p, %p\n", h->size, h->prev, h->next);
+            printf("FREE: ");
+        printf("%ld\n", i->size);
     }
+
 
     return (0);
 }
