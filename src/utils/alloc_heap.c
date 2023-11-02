@@ -27,7 +27,7 @@ static void set_flags(t_header* heap, size_t size)
 static void set_block(t_header *heap)
 {
     t_header* block = heap + HEADER;
-    block->size = heap->size - HEADER;
+    block->size = heap->size;
     block->flags = 0;
     block->flags |= FREE;
     block->prev = NULL;
@@ -36,8 +36,6 @@ static void set_block(t_header *heap)
 
 t_header*   alloc_heap(size_t size)
 {
-    if (size != TINY_HEAP || size != SMALL_HEAP)
-        size += HEADER * 2;
     t_header* heap = mmap(NULL, size, PROT_READ | PROT_WRITE,
         MAP_PRIVATE | MAP_ANON, -1, 0);
     heap->size = size - HEADER;

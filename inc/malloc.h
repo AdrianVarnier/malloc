@@ -5,11 +5,17 @@
 #include <sys/mman.h>
 
 // size
+// #define HEADER sizeof(t_header)
+// #define TINY_HEAP (4 * getpagesize() - HEADER)
+// #define SMALL_HEAP (16 * getpagesize() - HEADER)
+// #define TINY_BLOCK (TINY_HEAP / 100 - HEADER)
+// #define SMALL_BLOCK (SMALL_HEAP / 100 - HEADER)
+
 #define HEADER sizeof(t_header)
 #define TINY_HEAP (4 * getpagesize() - HEADER)
 #define SMALL_HEAP (16 * getpagesize() - HEADER)
-#define TINY_BLOCK (TINY_HEAP / 100 - HEADER)
-#define SMALL_BLOCK (SMALL_HEAP / 100 - HEADER)
+#define TINY_BLOCK (10)
+#define SMALL_BLOCK (20)
 
 // flags
 #define TINY (1 << 0)
@@ -35,6 +41,6 @@ void*   ft_malloc(size_t size);
 
 // utils
 t_header*   alloc_heap(size_t size);
-void        alloc_block(t_header* block, size_t size);
+t_header*   search_block(t_header* heap, size_t size);
 
 #endif
