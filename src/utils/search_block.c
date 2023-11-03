@@ -24,7 +24,8 @@ t_header*   search_block(t_header* heap, size_t size)
                     i->size = size;
                 }
                 i->flags ^= FREE;
-                return (i);
+                heap->size -= size;
+                return (i + HEADER);
             }
     }
     return (NULL);

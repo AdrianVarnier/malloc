@@ -38,6 +38,8 @@ t_header*   alloc_heap(size_t size)
 {
     t_header* heap = mmap(NULL, size, PROT_READ | PROT_WRITE,
         MAP_PRIVATE | MAP_ANON, -1, 0);
+    if (heap == MAP_FAILED)
+        return (NULL);
     heap->size = size - HEADER;
     heap->flags = 0;
     heap->prev = NULL;

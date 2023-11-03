@@ -3,19 +3,14 @@
 
 #include <unistd.h>
 #include <sys/mman.h>
+#include <stdio.h> //debug
 
 // size
-// #define HEADER sizeof(t_header)
-// #define TINY_HEAP (4 * getpagesize() - HEADER)
-// #define SMALL_HEAP (16 * getpagesize() - HEADER)
-// #define TINY_BLOCK (TINY_HEAP / 100 - HEADER)
-// #define SMALL_BLOCK (SMALL_HEAP / 100 - HEADER)
-
 #define HEADER sizeof(t_header)
-#define TINY_HEAP (4 * getpagesize() - HEADER)
-#define SMALL_HEAP (16 * getpagesize() - HEADER)
-#define TINY_BLOCK (10)
-#define SMALL_BLOCK (20)
+#define TINY_HEAP (4 * getpagesize())
+#define SMALL_HEAP (16 * getpagesize())
+#define TINY_BLOCK ((TINY_HEAP - HEADER) / 100 - HEADER)
+#define SMALL_BLOCK ((SMALL_HEAP - HEADER) / 100 - HEADER)
 
 // flags
 #define TINY (1 << 0)

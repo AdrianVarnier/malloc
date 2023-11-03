@@ -26,14 +26,18 @@ void*   ft_malloc(size_t size)
     size =  ((size + 32 + 15) & ~15);
     size_t heap_flags = get_heap_flags(size);
     if (heap_flags & ~LARGE)
+    {
         for (t_header* i = g_heap; i != NULL; i = i->next)
         {
             if (i->flags & heap_flags)
                 if ((ptr = search_block(i, size)) != NULL)
                     return (ptr);
         }
+    }
     size_t heap_size = get_heap_size(size);
     t_header* heap = alloc_heap(heap_size);
+    if (heap == NULL)
+        return (NULL);
     ptr = search_block(heap, size);
     return ((void *)ptr);
 }
