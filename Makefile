@@ -8,8 +8,7 @@ INC= inc
 
 CC= clang
 # CFLAGS= -Wall -Wextra -Werror
-CFLAGS= -fsanitize=address
-# CFLAGS=
+CFLAGS= -g
 
 AR= ar
 ARFLAGS= rcs
