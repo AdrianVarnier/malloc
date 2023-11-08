@@ -2,7 +2,7 @@
 
 static void    alloc_block(t_header* block, size_t size)
 {
-    t_header* new = (t_header*)((char*)block + size);
+    t_header* new = INC_HEADER(block, size);
     new->size = block->size - size;
     new->flags = 0;
     new->flags |= FREE;
@@ -13,7 +13,7 @@ static void    alloc_block(t_header* block, size_t size)
 
 t_header*   search_block(t_header* heap, size_t size)
 {
-    for (t_header* i = heap + HEADER; i != NULL; i = i->next)
+    for (t_header* i = INC_HEADER(heap, HEADER); i != NULL; i = i->next)
     {
         if  (i->flags & FREE)
             if (i->size >= size)
@@ -25,7 +25,7 @@ t_header*   search_block(t_header* heap, size_t size)
                 }
                 i->flags ^= FREE;
                 heap->size -= size;
-                return (i + HEADER);
+                return (INC_HEADER(i, HEADER));
             }
     }
     return (NULL);

@@ -26,7 +26,7 @@ static void set_flags(t_header* heap, size_t size)
 
 static void set_block(t_header *heap)
 {
-    t_header* block = heap + HEADER;
+    t_header* block = INC_HEADER(heap, HEADER);
     block->size = heap->size;
     block->flags = 0;
     block->flags |= FREE;

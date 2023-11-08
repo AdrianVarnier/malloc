@@ -9,8 +9,10 @@
 #define HEADER sizeof(t_header)
 #define TINY_HEAP (4 * getpagesize())
 #define SMALL_HEAP (16 * getpagesize())
-#define TINY_BLOCK ((TINY_HEAP - HEADER) / 100 - HEADER)
-#define SMALL_BLOCK ((SMALL_HEAP - HEADER) / 100 - HEADER)
+#define TINY_BLOCK 128
+#define SMALL_BLOCK 512
+
+#define INC_HEADER(ptr, size) ((t_header *)((char *)ptr + size))
 
 // flags
 #define TINY (1 << 0)
