@@ -2,7 +2,7 @@
 
 static void    alloc_block(t_header* block, size_t size)
 {
-    t_header* new = block + size;
+    t_header* new = (t_header*)((char*)block + size);
     new->size = block->size - size;
     new->flags = 0;
     new->flags |= FREE;
