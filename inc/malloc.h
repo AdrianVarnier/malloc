@@ -13,13 +13,13 @@
 #define SMALL_BLOCK 512
 
 #define INC_HEADER(ptr, size) ((t_header *)((char *)ptr + size))
+#define DEC_HEADER(ptr, size) ((t_header *)((char *)ptr - size))
 
 // flags
 #define TINY (1 << 0)
 #define SMALL (1 << 1)
 #define LARGE (1 << 2)
-
-#define FREE (1 << 4)
+#define FREE (1 << 3)
 
 // struct
 typedef struct  s_header
@@ -35,9 +35,12 @@ extern t_header*  g_heap;
 
 // lib
 void*   ft_malloc(size_t size);
+void    ft_free(void* ptr);
 
 // utils
 t_header*   alloc_heap(size_t size);
 t_header*   search_block(t_header* heap, size_t size);
+void        free_block(t_header* block);
+void*       ft_memset(void *s, int c, size_t len);
 
 #endif

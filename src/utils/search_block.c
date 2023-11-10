@@ -4,8 +4,7 @@ static void    alloc_block(t_header* block, size_t size)
 {
     t_header* new = INC_HEADER(block, size);
     new->size = block->size - size;
-    new->flags = 0;
-    new->flags |= FREE;
+    new->flags = block->flags;
     new->prev = block;
     new->next = NULL;
     block->next = new;

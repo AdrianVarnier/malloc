@@ -1,6 +1,4 @@
 #include "malloc.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 static size_t get_heap_flags(size_t size)
 {
