@@ -15,9 +15,13 @@ ARFLAGS= rcs
 
 SRC=	src/lib/malloc.c \
 		src/lib/free.c \
+		src/lib/realloc.c \
+		src/utils/alloc.c \
+		src/utils/dealloc.c \
+		src/utils/get.c \
 		src/utils/global.c \
-		src/utils/alloc_heap.c \
-		src/utils/search_block.c \
+		src/utils/init.c \
+		src/utils/search.c \
 
 OBJ= $(SRC:.c=.o)
 

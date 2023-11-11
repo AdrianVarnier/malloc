@@ -1,41 +1,23 @@
 #include "malloc.h"
 
-static size_t get_heap_flags(size_t size)
-{
-    if (size <= TINY_BLOCK)
-        return (TINY);
-    else if (size <= SMALL_BLOCK)
-        return (SMALL);
-    return (LARGE);
-}
-
-static size_t get_heap_size(size_t size)
-{
-    if (size <= TINY_BLOCK)
-        return (TINY_HEAP);
-    else if (size <= SMALL_BLOCK)
-        return (SMALL_HEAP);
-    return (size + HEADER);
-}
-
 void*   ft_malloc(size_t size)
 {
-    void* ptr = NULL;
+    void* block = NULL;
     size =  ((size + 32 + 15) & ~15);
-    size_t heap_flags = get_heap_flags(size);
+    size_t heap_flags = get_heap_flags1(size);
     if (heap_flags & ~LARGE)
     {
-        for (t_header* i = g_heap; i != NULL; i = i->next)
+        for (t_header* heap = g_heap; heap != NULL; heap = heap->next)
         {
-            if (i->flags & heap_flags)
-                if ((ptr = search_block(i, size)) != NULL)
-                    return (ptr);
+            if (heap->flags & heap_flags)
+                if ((block = search_free_block(heap, size)) != NULL)
+                    return (alloc_block(block, size));
         }
     }
     size_t heap_size = get_heap_size(size);
-    t_header* heap = alloc_heap(heap_size);
-    if (heap == NULL)
+    t_header* new_heap = alloc_heap(heap_size);
+    if (new_heap == NULL)
         return (NULL);
-    ptr = search_block(heap, size);
-    return ((void *)ptr);
+    block = search_free_block(new_heap, size);
+    return (alloc_block(block, size));
 }

@@ -34,11 +34,29 @@ typedef struct  s_header
 extern t_header*  g_heap;
 
 // lib
-void*   ft_malloc(size_t size);
-void    ft_free(void* ptr);
+void*       ft_malloc(size_t size);
+void        ft_free(void* ptr);
+void*       ft_realloc(void* ptr, size_t size);
 
 // utils
+void*       alloc_block(t_header* block, size_t size);
 t_header*   alloc_heap(size_t size);
-t_header*   search_block(t_header* heap, size_t size);
+
+void        dealloc_heap(t_header* heap);
+void        dealloc_block(t_header* block);
+
+size_t      get_heap_flags1(size_t size);
+size_t      get_heap_flags2(size_t size);
+size_t      get_heap_size(size_t size);
+t_header*   get_last_heap(void);
+
+void        init_block(t_header* block, size_t size);
+void        init_heap(t_header* heap, size_t size);
+
+t_header*   search_heap(t_header* block);
+t_header*   search_free_block(t_header* heap, size_t size);
+t_header*   search_block(void* ptr);
+
+void        *ft_memcpy(void *dst, const void *src, size_t len);
 
 #endif
