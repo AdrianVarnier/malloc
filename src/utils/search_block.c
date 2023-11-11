@@ -4,7 +4,8 @@ static void    alloc_block(t_header* block, size_t size)
 {
     t_header* new = INC_HEADER(block, size);
     new->size = block->size - size;
-    new->flags = block->flags;
+    new->flags = 0;
+    new->flags = FREE;
     new->prev = block;
     new->next = NULL;
     block->next = new;
@@ -22,7 +23,7 @@ t_header*   search_block(t_header* heap, size_t size)
                     alloc_block(i, size);
                     i->size = size;
                 }
-                i->flags ^= FREE;
+                i->flags &= ~FREE;
                 heap->size -= size;
                 return (INC_HEADER(i, HEADER));
             }

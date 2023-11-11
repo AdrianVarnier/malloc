@@ -30,7 +30,6 @@ static void set_block(t_header *heap)
     block->size = heap->size;
     block->flags = 0;
     block->flags |= FREE;
-    set_flags(block, heap->size + HEADER);
     block->prev = NULL;
     block->next = NULL;
 }

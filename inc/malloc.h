@@ -40,7 +40,5 @@ void    ft_free(void* ptr);
 // utils
 t_header*   alloc_heap(size_t size);
 t_header*   search_block(t_header* heap, size_t size);
-void        free_block(t_header* block);
-void*       ft_memset(void *s, int c, size_t len);
 
 #endif

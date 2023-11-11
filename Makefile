@@ -18,8 +18,6 @@ SRC=	src/lib/malloc.c \
 		src/utils/global.c \
 		src/utils/alloc_heap.c \
 		src/utils/search_block.c \
-		src/utils/free_block.c \
-		src/utils/ft_memset.c \
 
 OBJ= $(SRC:.c=.o)
 
