@@ -6,7 +6,7 @@ int main()
 {
     char *s[5];
     for (size_t i = 0; i < 5; i++)
-        s[i] = ft_malloc(3);
+        s[i] = ft_malloc(1);
     ft_free(s[1]);
     ft_free(s[3]);
     ft_free(s[2]);

@@ -22,6 +22,7 @@ SRC=	src/lib/malloc.c \
 		src/utils/global.c \
 		src/utils/init.c \
 		src/utils/search.c \
+		src/utils/libft.c \
 
 OBJ= $(SRC:.c=.o)
 

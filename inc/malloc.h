@@ -57,6 +57,6 @@ t_header*   search_heap(t_header* block);
 t_header*   search_free_block(t_header* heap, size_t size);
 t_header*   search_block(void* ptr);
 
-void        *ft_memcpy(void *dst, const void *src, size_t len);
+void*       ft_memcpy(void *dst, const void *src, size_t len);
 
 #endif
