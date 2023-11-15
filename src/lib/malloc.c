@@ -2,6 +2,8 @@
 
 void*   ft_malloc(size_t size)
 {
+    if (size == 0)
+        return (NULL);
     void* block = NULL;
     size =  ((size + 32 + 15) & ~15);
     size_t heap_flags = get_heap_flags1(size);

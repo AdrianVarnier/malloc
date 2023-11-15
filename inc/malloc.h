@@ -53,6 +53,10 @@ t_header*   get_last_heap(void);
 void        init_block(t_header* block, size_t size);
 void        init_heap(t_header* heap, size_t size);
 
+void        decrease_block1(t_header* block, size_t size);
+void        decrease_block2(t_header* block, size_t size);
+void        increase_block(t_header* block, size_t size);
+
 t_header*   search_heap(t_header* block);
 t_header*   search_free_block(t_header* heap, size_t size);
 t_header*   search_block(void* ptr);
