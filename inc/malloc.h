@@ -7,10 +7,10 @@
 
 // size
 #define HEADER sizeof(t_header)
-#define TINY_HEAP (4 * getpagesize())
-#define SMALL_HEAP (16 * getpagesize())
-#define TINY_BLOCK 128
-#define SMALL_BLOCK 512
+#define TINY_HEAP (size_t)(4 * getpagesize())
+#define SMALL_HEAP (size_t)(16 * getpagesize())
+#define TINY_BLOCK (size_t)128
+#define SMALL_BLOCK (size_t)512
 
 #define INC_HEADER(ptr, size) ((t_header *)((char *)ptr + size))
 #define DEC_HEADER(ptr, size) ((t_header *)((char *)ptr - size))
@@ -34,9 +34,9 @@ typedef struct  s_header
 extern t_header*  g_heap;
 
 // lib
-void*       ft_malloc(size_t size);
-void        ft_free(void* ptr);
-void*       ft_realloc(void* ptr, size_t size);
+void*       malloc(size_t size);
+void        free(void* ptr);
+void*       realloc(void* ptr, size_t size);
 void        show_alloc_mem(void);
 
 // utils

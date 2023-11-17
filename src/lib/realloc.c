@@ -1,17 +1,17 @@
 #include "malloc.h"
 
-void*   ft_realloc(void* ptr, size_t size)
+void*   realloc(void* ptr, size_t size)
 {
     t_header* block = search_block(ptr);
     if (block == NULL)
         return (NULL);
     if (size == 0)
     {
-        ft_free(ptr);
+        free(ptr);
         return (NULL);
     }
     if (ptr == NULL)
-        return (ft_malloc(size));
+        return (malloc(size));
 
     size_t new_size =  ((size + 32 + 15) & ~15);
     if (new_size < block->size)
@@ -29,11 +29,11 @@ void*   ft_realloc(void* ptr, size_t size)
             increase_block(block, new_size);
         else
         {
-            void* new_ptr = ft_malloc(size);
+            void* new_ptr = malloc(size);
             if (new_ptr == NULL)
                 return (NULL);
             ft_memcpy(new_ptr, ptr, new_size);
-            ft_free(ptr);
+            free(ptr);
             return (new_ptr);
         }
     }

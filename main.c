@@ -14,10 +14,12 @@ void print_heap(void)
 
 int main()
 {
-    ft_malloc(148);
-    ft_malloc(400);
-    ft_malloc(20);
-    ft_malloc(10000);
+    char *tiny = malloc(17);
+    strcpy(tiny, "0123456789abcdef");
+    char *small = malloc(161);
+    for (size_t i = 0; i != 10; i++)
+        strcpy(small + i * 16, tiny);
+    printf("%s\n%s\n", tiny, small);
     show_alloc_mem();
     return (0);
 }
