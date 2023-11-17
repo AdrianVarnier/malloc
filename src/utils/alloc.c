@@ -33,7 +33,7 @@ t_header*   alloc_heap(size_t size)
         g_heap = heap;
     else
     {
-        t_header* last_heap = get_last_heap();
+        t_header* last_heap = search_last_heap();
         last_heap->next = heap;
         heap->prev = last_heap;
     }

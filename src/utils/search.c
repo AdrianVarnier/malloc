@@ -31,3 +31,12 @@ t_header*   search_block(void* ptr)
                     return (block);
     return (NULL);
 }
+
+// return the last heap in heap list
+t_header*   search_last_heap(void)
+{
+    t_header* heap = g_heap; 
+    while (heap->next != NULL)
+        heap = heap->next;
+    return (heap);
+}

@@ -29,12 +29,3 @@ size_t  get_heap_size(size_t size)
         return (SMALL_HEAP);
     return (size + HEADER);
 }
-
-// return the last heap in heap list
-t_header*   get_last_heap(void)
-{
-    t_header* heap = g_heap; 
-    while (heap != NULL)
-        heap = heap->next;
-    return (heap);
-}

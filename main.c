@@ -14,13 +14,10 @@ void print_heap(void)
 
 int main()
 {
-    char *s[5];
-    s[0] = ft_malloc(64);
-    s[1] = ft_malloc(64);
-    s[2] = ft_malloc(64);
-    ft_free(s[1]);
-    print_heap();
-    ft_realloc(s[0], 16);
-    print_heap();
+    ft_malloc(148);
+    ft_malloc(400);
+    ft_malloc(20);
+    ft_malloc(10000);
+    show_alloc_mem();
     return (0);
 }
