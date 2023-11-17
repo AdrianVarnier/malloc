@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-void    free(void* ptr)
+void    inner_free(void* ptr)
 {
     if (ptr)
     {
@@ -20,4 +20,11 @@ void    free(void* ptr)
                 dealloc_heap(heap);
         }
     }
+}
+
+void    free(void* ptr)
+{
+    pthread_mutex_lock(&g_mutex);
+    inner_free(ptr);
+    pthread_mutex_unlock(&g_mutex);
 }

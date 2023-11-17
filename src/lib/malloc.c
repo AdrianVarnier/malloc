@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-void*   malloc(size_t size)
+void*   inner_malloc(size_t size)
 {
     if (size == 0)
         return (NULL);
@@ -22,4 +22,12 @@ void*   malloc(size_t size)
         return (NULL);
     block = search_free_block(new_heap, size);
     return (alloc_block(block, size));
+}
+
+void*   malloc(size_t size)
+{
+    pthread_mutex_lock(&g_mutex);
+    void* ptr = inner_malloc(size);
+    pthread_mutex_unlock(&g_mutex);
+    return (ptr);
 }

@@ -36,7 +36,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
-	$(CC) $(CFLAGS) -I $(INC) main.c $(NAME)
+	$(CC) $(CFLAGS) -I $(INC) test.c $(NAME)
 
 .PHONY: clean
 clean:

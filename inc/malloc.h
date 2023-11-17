@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <sys/mman.h>
+#include <pthread.h>
 #include <stdio.h> //debug
 
 // size
@@ -31,9 +32,13 @@ typedef struct  s_header
 }   t_header;
 
 // global
-extern t_header*  g_heap;
+extern t_header*        g_heap;
+extern pthread_mutex_t  g_mutex;
 
 // lib
+void*       inner_malloc(size_t size);
+void        inner_free(void* ptr);
+void*       inner_realloc(void* ptr, size_t size);
 void*       malloc(size_t size);
 void        free(void* ptr);
 void*       realloc(void* ptr, size_t size);
