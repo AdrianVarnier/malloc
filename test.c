@@ -89,14 +89,81 @@ static void malloc_multiple_tiny(int mode)
     }
     print_ok("malloc_multiple_tiny", mode);
     for (size_t i = 0; i < 1000; i++)
-    {
         free(ptr[i]);
+}
+
+static void malloc_multiple_small(int mode)
+{
+    void *ptr[1000];
+    for (size_t i = 0; i < 1000; i++)
+    {
+        ptr[i] = malloc(512 - 32);
+        if (!ptr[i])
+        {
+            print_ko("malloc_multiple_small", mode);
+            for (; i > -1; i--)
+                free(ptr[i]);
+            return ;
+        }
     }
+    print_ok("malloc_multiple_small", mode);
+    for (size_t i = 0; i < 1000; i++)
+        free(ptr[i]);
+}
+
+static void malloc_multiple_large(int mode)
+{
+    void *ptr[1000];
+    for (size_t i = 0; i < 1000; i++)
+    {
+        ptr[i] = malloc(1024 - 32);
+        if (!ptr[i])
+        {
+            print_ko("malloc_multiple_large", mode);
+            for (; i > -1; i--)
+                free(ptr[i]);
+            return ;
+        }
+    }
+    print_ok("malloc_multiple_large", mode);
+    for (size_t i = 0; i < 1000; i++)
+        free(ptr[i]);
+}
+
+static void malloc_multiple(int mode)
+{
+    void *ptr[50];
+    for (size_t i = 0; i < 50; i++)
+    {
+        if (i % 10 == 0 || i % 5 == 0)
+            ptr[i] = malloc(1024 - 32);
+        else if (i % 2 == 0)
+            ptr[i] = malloc(128 - 32);
+        else
+            ptr[i] = malloc(512 - 32);
+        if (!ptr[i])
+        {
+            print_ko("malloc_multiple", mode);
+            for (; i > -1; i--)
+                free(ptr[i]);
+            return ;
+        }
+    }
+    print_ok("malloc_multiple", mode);
+    for (size_t i = 0; i < 50; i++)
+        free(ptr[i]);
 }
 
 int main()
 {
-    int mode = 0;
-    malloc_multiple_tiny(mode);
+    int mode = 1;
+    malloc_zero(mode);
+    malloc_tiny(mode);
+    malloc_small(mode);
+    malloc_large(mode);
+    malloc_multiple_tiny(0);
+    malloc_multiple_small(0);
+    malloc_multiple_large(0);
+    malloc_multiple(0);
     return (0);
 }
