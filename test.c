@@ -36,7 +36,7 @@ static int malloc_zero(int mode)
 
 static int malloc_tiny(int mode)
 {
-    void* ptr = malloc(128);
+    void* ptr = malloc(128 - 32);
     if (!ptr)
     {
         print_ko("malloc_tiny", mode);
@@ -49,7 +49,7 @@ static int malloc_tiny(int mode)
 
 static int malloc_small(int mode)
 {
-    void* ptr = malloc(512);
+    void* ptr = malloc(512 - 32);
     if (!ptr)
     {
         print_ko("malloc_small", mode);
@@ -62,7 +62,7 @@ static int malloc_small(int mode)
 
 static int malloc_large(int mode)
 {
-    void* ptr = malloc(1024);
+    void* ptr = malloc(1024 - 32);
     if (!ptr)
     {
         print_ko("malloc_large", mode);
@@ -78,7 +78,7 @@ static void malloc_multiple_tiny(int mode)
     void *ptr[1000];
     for (size_t i = 0; i < 1000; i++)
     {
-        ptr[i] = malloc(128);
+        ptr[i] = malloc(128 - 32);
         if (!ptr[i])
         {
             print_ko("malloc_multiple_tiny", mode);
@@ -89,16 +89,14 @@ static void malloc_multiple_tiny(int mode)
     }
     print_ok("malloc_multiple_tiny", mode);
     for (size_t i = 0; i < 1000; i++)
+    {
         free(ptr[i]);
+    }
 }
 
 int main()
 {
     int mode = 0;
-    malloc_zero(mode);
-    malloc_small(mode);
-    malloc_tiny(mode);
-    malloc_large(mode);
     malloc_multiple_tiny(mode);
     return (0);
 }

@@ -7,8 +7,8 @@ void    dealloc_heap(t_header* heap)
         heap->prev->next = heap->next;
     if (heap->next != NULL)
         heap->next->prev = heap->prev;
-    if (heap->prev == NULL && heap->next == NULL)
-        g_heap = NULL;
+    if (heap->prev == NULL)
+        g_heap = heap->next;
     munmap(heap, heap->size + HEADER);
 }
 
