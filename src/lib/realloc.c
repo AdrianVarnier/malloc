@@ -2,6 +2,8 @@
 
 void*   inner_realloc(void* ptr, size_t size)
 {
+    if (ptr == NULL)
+        return (inner_malloc(size));
     t_header* block = search_block(ptr);
     if (block == NULL)
         return (NULL);
@@ -10,8 +12,6 @@ void*   inner_realloc(void* ptr, size_t size)
         inner_free(ptr);
         return (NULL);
     }
-    if (ptr == NULL)
-        return (inner_malloc(size));
 
     size_t new_size =  ((size + 32 + 15) & ~15);
     if (new_size < block->size)

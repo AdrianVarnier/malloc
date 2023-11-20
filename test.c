@@ -154,16 +154,90 @@ static void malloc_multiple(int mode)
         free(ptr[i]);
 }
 
+static void test_free()
+{
+    void* ptr[11];
+    for (size_t i = 0; i < 5; i++)
+        ptr[i] = malloc(128 - 32);
+    for (size_t i = 5; i < 10; i++)
+        ptr[i] = malloc(512 - 32);
+    ptr[10] = malloc(1024 - 32);
+    free(NULL);
+    free(ptr[0] + 1);
+    show_alloc_mem();
+    for (size_t i = 0; i < 11; i++)
+        free(ptr[i]);
+    show_alloc_mem();
+}
+
+static void realloc_null(int mode)
+{
+    void* result[2];
+    void* ptr[11];
+    for (size_t i = 0; i < 5; i++)
+        ptr[i] = malloc(16);
+    for (size_t i = 5; i < 10; i++)
+        ptr[i] = malloc(156);
+    result[0] = realloc(NULL, 0);
+    result[1] = realloc(NULL, 32);
+    if (result[0] != NULL && result[1] == NULL)
+        print_ko("realloc_null", mode);
+    else
+        print_ok("realloc_null", mode);
+    for (size_t i = 0; i < 10; i++)
+        free(ptr[i]);
+    for (size_t i = 0; i < 2; i++)
+        free(result[i]);
+}
+
+static void realloc_unknow(int mode)
+{
+    void* result;
+    void* ptr[11];
+    for (size_t i = 0; i < 5; i++)
+        ptr[i] = malloc(16);
+    for (size_t i = 5; i < 10; i++)
+        ptr[i] = malloc(156);
+    result = realloc(ptr[0] + 1, 12);
+    if (result != NULL)
+        print_ko("realloc_unknow", mode);
+    else
+        print_ok("realloc_unknow", mode);
+    for (size_t i = 0; i < 10; i++)
+        free(ptr[i]);
+}
+
+static void realloc_zero(int mode)
+{
+    void* result;
+    void* ptr[11];
+    for (size_t i = 0; i < 5; i++)
+        ptr[i] = malloc(16);
+    for (size_t i = 5; i < 10; i++)
+        ptr[i] = malloc(156);
+    result = realloc(ptr[0], 0);
+    if (result != NULL)
+        print_ko("realloc_unknow", mode);
+    else
+        print_ok("realloc_unknow", mode);
+    for (size_t i = 0; i < 10; i++)
+        free(ptr[i]);
+}
+
 int main()
 {
     int mode = 1;
-    malloc_zero(mode);
-    malloc_tiny(mode);
-    malloc_small(mode);
-    malloc_large(mode);
-    malloc_multiple_tiny(0);
-    malloc_multiple_small(0);
-    malloc_multiple_large(0);
-    malloc_multiple(0);
+    // malloc_zero(mode);
+    // malloc_tiny(mode);
+    // malloc_small(mode);
+    // malloc_large(mode);
+    // malloc_multiple_tiny(0);
+    // malloc_multiple_small(0);
+    // malloc_multiple_large(0);
+    // malloc_multiple(0);
+    // test_free();
+    // realloc_null(mode);
+    // realloc_unknow(mode);
+    // realloc_zero(mode);
     return (0);
 }
