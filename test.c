@@ -224,20 +224,41 @@ static void realloc_zero(int mode)
         free(ptr[i]);
 }
 
+static void realloc_smaller(int mode)
+{
+    void* result[1];
+    void* ptr[11];
+    for (size_t i = 0; i < 5; i++)
+        ptr[i] = malloc(16);
+    for (size_t i = 5; i < 10; i++)
+        ptr[i] = malloc(200);
+    ptr[10] = malloc(1000);
+    if (mode)
+        show_alloc_mem();
+    free(ptr[1]);
+    free(ptr[6]);
+    result[0] = realloc(ptr[0], 32);
+    result[1] = realloc(ptr[2], 32);
+    result[2] = realloc(ptr[6], 300);
+    result[3] = realloc(ptr[8], 300);
+    result[4] = realloc(ptr[10], 2000);
+
+}
+
 int main()
 {
     int mode = 1;
-    // malloc_zero(mode);
-    // malloc_tiny(mode);
-    // malloc_small(mode);
-    // malloc_large(mode);
-    // malloc_multiple_tiny(0);
-    // malloc_multiple_small(0);
-    // malloc_multiple_large(0);
-    // malloc_multiple(0);
-    // test_free();
-    // realloc_null(mode);
-    // realloc_unknow(mode);
-    // realloc_zero(mode);
+    malloc_zero(mode);
+    malloc_tiny(mode);
+    malloc_small(mode);
+    malloc_large(mode);
+    malloc_multiple_tiny(0);
+    malloc_multiple_small(0);
+    malloc_multiple_large(0);
+    malloc_multiple(0);
+    test_free();
+    realloc_null(mode);
+    realloc_unknow(mode);
+    realloc_zero(mode);
     return (0);
 }
