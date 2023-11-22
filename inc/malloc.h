@@ -67,6 +67,8 @@ t_header*   search_free_block(t_header* heap, size_t size);
 t_header*   search_block(void* ptr);
 t_header*   search_last_heap(void);
 
+void*       realloc_block(void* ptr, size_t size);
+
 void*       ft_memcpy(void *dst, const void *src, size_t len);
 
 void        ft_print_addr(size_t x);

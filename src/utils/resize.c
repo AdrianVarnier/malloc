@@ -24,7 +24,7 @@ void    decrease_block2(t_header* block, size_t size)
     t_header* new = INC_HEADER(block, size);
     new->size = offset;
     new->flags = 0;
-    new->flags = FREE;
+    new->flags |= FREE;
     new->prev = block;
     new->next = block->next;
     block->next->prev = new;

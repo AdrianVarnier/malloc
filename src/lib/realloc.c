@@ -2,16 +2,20 @@
 
 void*   inner_realloc(void* ptr, size_t size)
 {
-    if (ptr == NULL)
+    if (!ptr)
         return (inner_malloc(size));
-    t_header* block = search_block(ptr);
-    if (block == NULL)
-        return (NULL);
-    if (size == 0)
+    if (!size)
     {
         inner_free(ptr);
         return (NULL);
     }
+
+    t_header* block = search_block(ptr);
+    if (!block)
+        return (NULL);
+
+    if (search_heap(block)->flags & LARGE)
+        return (realloc_block(ptr, size));
 
     size_t new_size =  ((size + 32 + 15) & ~15);
     if (new_size < block->size)
@@ -28,14 +32,7 @@ void*   inner_realloc(void* ptr, size_t size)
         && new_size - block->size <= block->next->size - HEADER)
             increase_block(block, new_size);
         else
-        {
-            void* new_ptr = inner_malloc(size);
-            if (new_ptr == NULL)
-                return (NULL);
-            ft_memcpy(new_ptr, ptr, new_size);
-            inner_free(ptr);
-            return (new_ptr);
-        }
+            return (realloc_block(ptr, size));
     }
     return (ptr);
 }

@@ -23,6 +23,7 @@ SRC=	src/lib/malloc.c \
 		src/utils/init.c \
 		src/utils/search.c \
 		src/utils/resize.c \
+		src/utils/realloc.c \
 		src/utils/print.c \
 		src/utils/libft.c \
 
