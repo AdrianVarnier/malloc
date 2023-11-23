@@ -7,7 +7,7 @@ NAME = libft_malloc_$(HOSTTYPE).so
 INC= inc
 
 CC= clang
-# CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 
 AR= ar
 ARFLAGS= rcs
