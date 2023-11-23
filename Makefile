@@ -37,7 +37,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
-	$(CC) $(CFLAGS) -I $(INC) test.c $(NAME)
 
 .PHONY: clean
 clean:
@@ -46,7 +45,6 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf a.out
 
 .PHONY: re
 re: fclean $(NAME)

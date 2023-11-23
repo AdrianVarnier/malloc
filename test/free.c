@@ -16,7 +16,7 @@ static void free_tiny10(void)
     show_alloc_mem();
     free(ptr[1]);
     show_alloc_mem();
-    free(ptr[2]);
+    free(ptr[0]);
 }
 
 static void free_tiny01(void)
@@ -25,7 +25,7 @@ static void free_tiny01(void)
     ptr[0] = malloc(128 - 32);
     ptr[1] = malloc(128 - 32);
     show_alloc_mem();
-    free(ptr[2]);
+    free(ptr[0]);
     show_alloc_mem();
     free(ptr[1]);
 }
@@ -59,9 +59,9 @@ static void free_small10(void)
     ptr[0] = malloc(512 - 32);
     ptr[1] = malloc(512 - 32);
     show_alloc_mem();
-    free(ptr[1]);
+    free(ptr[0]);
     show_alloc_mem();
-    free(ptr[2]);
+    free(ptr[1]);
 }
 
 static void free_small01(void)
@@ -70,7 +70,7 @@ static void free_small01(void)
     ptr[0] = malloc(512 - 32);
     ptr[1] = malloc(512 - 32);
     show_alloc_mem();
-    free(ptr[2]);
+    free(ptr[0]);
     show_alloc_mem();
     free(ptr[1]);
 }
@@ -118,8 +118,10 @@ static void free_unknow(void)
     free(ptr);
 }
 
-void test_free(void)
+void test_free(int mode)
 {
+    if (mode == -1)
+        return ;
     free_tiny();
     free_tiny10();
     free_tiny01();

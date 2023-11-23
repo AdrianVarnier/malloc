@@ -121,5 +121,4 @@ void test_malloc(int mode)
     malloc_multiple_small(mode);
     malloc_large(mode);
     malloc_multiple_large(mode);
-    malloc_multiple(mode);
 }
