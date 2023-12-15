@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-void    show_alloc_mem(void)
+void    inner_show_alloc_mem(void)
 {
     unsigned long long size = 0;
     for (t_header* heap = g_heap; heap != NULL; heap = heap->next)
@@ -32,4 +32,11 @@ void    show_alloc_mem(void)
     write(1, &"Total : ", 8);
     ft_print_number(size);
     write(1, &" bytes\n", 7);
+}
+
+void    inner_show_alloc_mem(void)
+{
+    pthread_mutex_lock(&g_mutex);
+    inner_show_alloc_mem();
+    pthread_mutex_unlock(&g_mutex);
 }

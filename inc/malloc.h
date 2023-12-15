@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <pthread.h>
-#include <stdio.h> //debug
 
 // size
 #define HEADER sizeof(t_header)
