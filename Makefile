@@ -7,10 +7,8 @@ NAME = libft_malloc_$(HOSTTYPE).so
 INC= inc
 
 CC= gcc
-CFLAGS= -Wall -Wextra -Werror
-
-AR= ar
-ARFLAGS= rcs
+CFLAGS= -Wall -Wextra -Werror -fPIC
+LFLAGS= -shared
 
 SRC=	src/lib/malloc.c \
 		src/lib/free.c \
@@ -36,7 +34,7 @@ OBJ= $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+	$(CC) $(LFLAGS) -o $(NAME) $(OBJ)
 
 .PHONY: clean
 clean:

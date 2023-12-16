@@ -7,7 +7,7 @@ void*   inner_malloc(size_t size)
     void* block = NULL;
     size =  ((size + 32 + 15) & ~15);
     size_t heap_flags = get_heap_flags1(size);
-    if (heap_flags & ~LARGE)
+    if (!(heap_flags & LARGE))
     {
         for (t_header* heap = g_heap; heap != NULL; heap = heap->next)
         {

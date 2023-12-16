@@ -29,3 +29,10 @@ size_t  get_heap_size(size_t size)
         return (SMALL_HEAP);
     return (size + HEADER);
 }
+
+// return allocated size of the given 'ptr'
+size_t  get_ptr_size(void* ptr)
+{
+    t_header* block = DEC_HEADER(ptr, HEADER);
+    return (block->size - HEADER);
+}

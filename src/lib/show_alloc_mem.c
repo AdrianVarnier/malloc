@@ -34,7 +34,7 @@ void    inner_show_alloc_mem(void)
     write(1, &" bytes\n", 7);
 }
 
-void    inner_show_alloc_mem(void)
+void    show_alloc_mem(void)
 {
     pthread_mutex_lock(&g_mutex);
     inner_show_alloc_mem();

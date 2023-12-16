@@ -53,6 +53,7 @@ void        dealloc_block(t_header* block);
 size_t      get_heap_flags1(size_t size);
 size_t      get_heap_flags2(size_t size);
 size_t      get_heap_size(size_t size);
+size_t      get_ptr_size(void* ptr);
 
 void        init_block(t_header* block, size_t size);
 void        init_heap(t_header* heap, size_t size);
