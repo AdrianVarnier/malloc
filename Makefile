@@ -3,6 +3,7 @@ ifeq ($(HOSTTYPE),)
 endif
 
 NAME = libft_malloc_$(HOSTTYPE).so
+LINK = libft_malloc.so
 
 INC= inc
 
@@ -35,6 +36,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(LFLAGS) -o $(NAME) $(OBJ)
+	ln -s $(NAME) $(LINK)
+	ls -l $(LINK)
 
 .PHONY: clean
 clean:
@@ -43,6 +46,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(LINK)
 
 .PHONY: re
 re: fclean $(NAME)
