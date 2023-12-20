@@ -8,7 +8,7 @@ void    inner_free(void* ptr)
         if (block)
         {
             t_header* heap = search_heap(block);
-            if (heap->flags & ~LARGE)
+            if (!(heap->flags & LARGE))
             {
                 heap->size += block->size;
                 dealloc_block(block);

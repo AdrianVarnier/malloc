@@ -9,6 +9,8 @@ void    dealloc_heap(t_header* heap)
         heap->next->prev = heap->prev;
     if (heap->prev == NULL)
         g_heap = heap->next;
+    if (heap->flags & LARGE)
+        heap->size = INC_HEADER(heap, HEADER)->size + HEADER;
     munmap(heap, heap->size + HEADER);
 }
 
