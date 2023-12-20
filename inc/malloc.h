@@ -8,9 +8,9 @@
 // size
 #define HEADER sizeof(t_header)
 #define TINY_HEAP (size_t)(4 * getpagesize())
-#define SMALL_HEAP (size_t)(16 * getpagesize())
-#define TINY_BLOCK (size_t)128
-#define SMALL_BLOCK (size_t)512
+#define SMALL_HEAP (size_t)(32 * getpagesize())
+#define TINY_BLOCK (size_t)128 + HEADER
+#define SMALL_BLOCK (size_t)1024 + HEADER
 
 #define INC_HEADER(ptr, size) ((t_header *)((char *)ptr + size))
 #define DEC_HEADER(ptr, size) ((t_header *)((char *)ptr - size))
@@ -54,6 +54,7 @@ size_t      get_heap_flags1(size_t size);
 size_t      get_heap_flags2(size_t size);
 size_t      get_heap_size(size_t size);
 size_t      get_ptr_size(void* ptr);
+size_t      get_heap_count(size_t flag);
 
 void        init_block(t_header* block, size_t size);
 void        init_heap(t_header* heap, size_t size);

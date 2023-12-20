@@ -36,3 +36,13 @@ size_t  get_ptr_size(void* ptr)
     t_header* block = DEC_HEADER(ptr, HEADER);
     return (block->size - HEADER);
 }
+
+// return the number of heap of 'flag' type
+size_t  get_heap_count(size_t flag)
+{
+    size_t count = 0;
+    for (t_header* heap = g_heap; heap != NULL; heap = heap->next)
+        if (heap->flags & flag)
+            count++;
+    return (count);
+}

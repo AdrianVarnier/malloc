@@ -3,6 +3,8 @@
 // deallocate 'heap' and remove it from heap list
 void    dealloc_heap(t_header* heap)
 {
+    if (!(heap->flags & LARGE) && get_heap_count(heap->flags) == 1)
+        return ;
     if (heap->prev != NULL)
         heap->prev->next = heap->next;
     if (heap->next != NULL)
